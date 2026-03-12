@@ -1,8 +1,5 @@
 <script lang="ts">
-  import { UnifoldProvider } from "@unifold/connect-svelte";
   import DepositForm from "./DepositForm.svelte";
-
-  let publishableKey = $state("");
 </script>
 
 <svelte:head>
@@ -16,27 +13,7 @@
     <p>A standalone SvelteKit app using the Unifold Svelte SDK.</p>
 
     <div class="form">
-      <label>
-        <span>API Key</span>
-        <input type="text" bind:value={publishableKey} placeholder="pk_live_..." />
-      </label>
-
-      <div class="info-box">
-        <strong>Demo mode</strong>
-        <p>
-          In production, load your API key from an environment variable
-          (<code>PUBLIC_UNIFOLD_KEY</code>) and place <code>UnifoldProvider</code> in your root layout.
-          This demo uses an input field so you can try different keys.
-        </p>
-      </div>
-
-      {#if publishableKey.trim()}
-        {#key publishableKey.trim()}
-          <UnifoldProvider publishableKey={publishableKey.trim()} config={{ appearance: "dark" }}>
-            <DepositForm />
-          </UnifoldProvider>
-        {/key}
-      {/if}
+      <DepositForm />
     </div>
   </div>
 </main>
@@ -143,19 +120,6 @@
 
   :global(.deposit-btn:hover:not(:disabled)) { background: #3b57e6; }
   :global(.deposit-btn:disabled) { opacity: 0.6; cursor: not-allowed; }
-
-  .info-box {
-    width: 100%;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    text-align: left;
-    background: #1a1a2e;
-    border: 1px solid #2a2a4a;
-    color: #93a3f8;
-  }
-
-  .info-box p { color: inherit; opacity: 0.8; margin-top: 0.25rem; font-size: 0.85rem; line-height: 1.5; }
-  .info-box code { display: inline; font-size: 0.8rem; opacity: 0.9; background: #0f0f1e; padding: 0.1rem 0.35rem; border-radius: 0.25rem; }
 
   :global(.feedback) {
     width: 100%;
